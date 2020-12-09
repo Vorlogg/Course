@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App3.View.MainPage">
+
+
+    <StackLayout>
+        <StackLayout>
+
+            <Label Text="Исходной текст"></Label>
+            <Editor Text="{Binding CryptoText}" FontSize="Medium"  />
+            <Label Text="Результат"></Label>
+            <Editor Text="{Binding DecryptoText}" FontSize="Medium" />
+            <Button Text="Расшифровать" Command="{Binding CommandDecrypto}" />
+            <Button Text="Зашифровать" Command="{Binding CommandCrypto}" />
+            <Button Text="Выбор файла txt" Command="{Binding CommandOpenFileTxt}" />
+            <Button Text="Выбор файла word" Command="{Binding CommandOpenFileWord}" />
+            <Button Text="Сохранение файла в формате txt"  Command="{Binding CommandSaveFileTxt}" />
+            <Button Text="Сохранение файла в формате word"  Command="{Binding CommandSaveFileWord}" />
+          
+
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>
