@@ -127,13 +127,9 @@ namespace App3.ViewModels
         {
 
             byte[] data = await Xamarin.Forms.DependencyService.Get<IFileWorker>().OpenFile();
-
-
-            using (WordDocument document = new WordDocument(new MemoryStream(data), FormatType.Txt))
-            {
-                CryptoText = document.GetText().Substring(61);
-            }
-
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            var ANSI = CodePagesEncodingProvider.Instance.GetEncoding(1251);
+            CryptoText = ANSI.GetString(data);
 
         }
         public async void OpenFileWord()
