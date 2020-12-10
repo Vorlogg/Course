@@ -10,6 +10,7 @@ using System.Text;
 using Syncfusion.DocIO;
 using Syncfusion.DocIO.DLS;
 using App3.ViewModels;
+using ntics;
 
 namespace App3.ViewModels
 {
@@ -127,11 +128,14 @@ namespace App3.ViewModels
         {
 
             byte[] data = await Xamarin.Forms.DependencyService.Get<IFileWorker>().OpenFile();
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            var ANSI = CodePagesEncodingProvider.Instance.GetEncoding(1251);
-            CryptoText = ANSI.GetString(data);
 
-        }
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            var ANSI = ntics.Text.Encoding1251.GetEncoding(1251);
+            string rezult = ANSI.GetString(data);
+                                   
+            CryptoText = rezult;
+            
+             }
         public async void OpenFileWord()
         {
 
