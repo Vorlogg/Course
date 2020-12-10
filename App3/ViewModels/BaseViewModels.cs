@@ -79,10 +79,10 @@ namespace App3.ViewModels
         }
 
         private void Decrypto()
-        { 
-            if (CryptoText!=null)
+        {
+            if (CryptoText != null && CryptoText != "")
             {
-                if (Key!=null)
+                if (Key != null && Key != "")
                 {
                     DecryptoText = vig.Decrypt(CryptoText, Key);
 
@@ -102,9 +102,9 @@ namespace App3.ViewModels
 
         private void Crypto()
         {
-            if (CryptoText != null)
+            if (CryptoText != null && CryptoText !="")
             {
-                if (Key != null)
+                if (Key != null && Key !="")
                 {
                     DecryptoText = vig.Encrypt(CryptoText, Key);
 
