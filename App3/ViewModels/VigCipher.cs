@@ -64,6 +64,7 @@ namespace App3.ViewModels
                     result += text[i];
                 }
             }
+            temp = 0;
             return result;
         }
     }

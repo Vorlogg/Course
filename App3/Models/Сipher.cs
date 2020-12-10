@@ -8,6 +8,7 @@ namespace App3.Models
     {
         public string CryptoText { get; set; }
         public string DecryptoText { get; set; }
+        public string Key { get; set; }
 
        
     }

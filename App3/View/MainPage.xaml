@@ -11,6 +11,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -22,14 +23,16 @@
                 
             <Label Grid.Row="0"  Text="Исходной текст"></Label>
             <Editor Grid.Row="1" Text="{Binding CryptoText}" FontSize="Medium" />
-            <Label Grid.Row="3" Text="Результат"></Label>
-            <Editor Grid.Row="4" Text="{Binding DecryptoText}" FontSize="Medium" />
-            <Button Grid.Row="5" Text="Расшифровать" Command="{Binding CommandDecrypto}" />
-            <Button Grid.Row="6" Text="Зашифровать" Command="{Binding CommandCrypto}" />
-            <Button Grid.Row="7" Text="Выбор файла txt" Command="{Binding CommandOpenFileTxt}" />
-            <Button Grid.Row="8" Text="Выбор файла word" Command="{Binding CommandOpenFileWord}" />
-            <Button Grid.Row="9" Text="Сохранение файла в формате txt"  Command="{Binding CommandSaveFileTxt}" />
-            <Button Grid.Row="10" Text="Сохранение файла в формате word"  Command="{Binding CommandSaveFileWord}" />
+            <Label Grid.Row="2" Text="Ключ слово"></Label>
+            <Editor Grid.Row="3" Text="{Binding Key}" FontSize="Medium" />
+            <Label Grid.Row="4" Text="Результат"></Label>
+            <Editor Grid.Row="5" Text="{Binding DecryptoText}" FontSize="Medium"  IsReadOnly="true" />
+            <Button Grid.Row="6" Text="Расшифровать" Command="{Binding CommandDecrypto}" />
+            <Button Grid.Row="7" Text="Зашифровать" Command="{Binding CommandCrypto}" />
+            <Button Grid.Row="8" Text="Выбор файла txt" Command="{Binding CommandOpenFileTxt}" />
+            <Button Grid.Row="9" Text="Выбор файла word" Command="{Binding CommandOpenFileWord}" />
+            <Button Grid.Row="10" Text="Сохранение файла в формате txt"  Command="{Binding CommandSaveFileTxt}" />
+            <Button Grid.Row="11" Text="Сохранение файла в формате word"  Command="{Binding CommandSaveFileWord}" />
             </Grid>
 
 
