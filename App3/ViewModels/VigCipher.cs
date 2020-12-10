@@ -1,70 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
 
 namespace App3.ViewModels
 {
-   public class VigCipher
+    public class VigCipher
     {
-       private  static char[] characters = new char[] { 'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И',
-                                                'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С',
-                                                'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ь', 'Ы', 'Ъ',
-                                                'Э', 'Ю', 'Я', ' ', '1', '2', '3', '4', '5', '6', '7',
-                                                '8', '9', '0' };
 
+        private int keyIndex;
+        public int temp = 0;
 
-       private  static  int  N = characters.Length;
+        public string alphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
 
-        public string Encode(string input, string keyword)
+        public string Encrypt(string text, string key)
         {
-            input = input.ToUpper();
-            keyword = keyword.ToUpper();
-
-            string result = "";
-
-            int keyword_index = 0;
-
-            foreach (char symbol in input)
-            {
-                int c = (Array.IndexOf(characters, symbol) +
-                    Array.IndexOf(characters, keyword[keyword_index])) % N;
-
-                result += characters[c];
-
-                keyword_index++;
-
-                if ((keyword_index + 1) == keyword.Length)
-                    keyword_index = 0;
-            }
-
-            return result;
+          
+            return Encryptor(text, key, true); 
         }
 
-        public string Decode(string input, string keyword)
+        public string Decrypt(string text, string key)
         {
-            input = input.ToUpper();
-            keyword = keyword.ToUpper();
-
-            string result = "";
-
-            int keyword_index = 0;
-
-            foreach (char symbol in input)
-            {
-                int p = (Array.IndexOf(characters, symbol) + N -
-                    Array.IndexOf(characters, keyword[keyword_index])) % N;
-
-                result += characters[p];
-
-                keyword_index++;
-
-                if ((keyword_index + 1) == keyword.Length)
-                    keyword_index = 0;
-            }
-
-            return result;
+            
+            return Encryptor(text, key, false);
         }
 
-       
+        private string Encryptor(string text, string key, bool encrypt)
+        {
+            int k;
+            string result = "";
+            int alph = alphabet.Length;
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (alphabet.IndexOf(char.ToLower(text[i])) > -1)
+                {
+                    if (temp == 0)
+                    {
+                        keyIndex = 0;
+                    }
+                    else
+                    {
+
+                       keyIndex = (int)(temp % (key.Length));
+                    }
+                    if (encrypt)
+                    {
+                        k = 1;
+                    }
+                    else
+                    {
+                        k = -1;
+                    }
+                    int codeIndex = alphabet.IndexOf(key[keyIndex]);
+                    int letterIndex = alphabet.IndexOf(text[i]);
+                    int resultIndex = (alph + letterIndex + (k * codeIndex)) % alph;
+                    result += alphabet[resultIndex];
+                    temp++;
+                }
+                else
+                {
+                    result += text[i];
+                }
+            }
+            return result;
+        }
     }
 }
+
+
