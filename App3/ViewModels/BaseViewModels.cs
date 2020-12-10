@@ -152,27 +152,48 @@ namespace App3.ViewModels
 
         public async void SaveFileWord()
         {
-
-            string text = DecryptoText;
-            MemoryStream data = new MemoryStream();
-            using (WordDocument document = new WordDocument())
+            try
             {
-                document.EnsureMinimal();
-                document.LastParagraph.AppendText(text);
-                document.Save(data, FormatType.Docx);
+                string text = DecryptoText;
+                MemoryStream data = new MemoryStream();
+                using (WordDocument document = new WordDocument())
+                {
+                    document.EnsureMinimal();
+                    document.LastParagraph.AppendText(text);
+                    document.Save(data, FormatType.Docx);
+
+                }
+
+                await Xamarin.Forms.DependencyService.Get<IFileWorker>().SaveFileWord(data.ToArray());
+                DecryptoText = "Файл успешно сохранен";
+            }
+            catch (Exception)
+            {
+
+                DecryptoText = "Не удалось сохрать файл";
 
             }
-
-            await Xamarin.Forms.DependencyService.Get<IFileWorker>().SaveFileWord(data.ToArray());
 
         }
 
         public async void SaveFileTxt()
         {
-            string text = DecryptoText;
-            byte[] data = null;
-            data = Encoding.UTF8.GetBytes(text);
-            await Xamarin.Forms.DependencyService.Get<IFileWorker>().SaveFileTxt(data);
+            try
+            {
+                string text = DecryptoText;
+                byte[] data = null;
+                data = Encoding.UTF8.GetBytes(text);
+                await Xamarin.Forms.DependencyService.Get<IFileWorker>().SaveFileTxt(data);
+
+                DecryptoText = "Файл успешно сохранен";
+            }
+            catch (Exception)
+            {
+
+                DecryptoText = "Не удалось сохрать файл";
+
+            }
+           
 
         }
 
